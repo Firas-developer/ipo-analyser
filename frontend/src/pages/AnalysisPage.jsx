@@ -29,6 +29,13 @@ export default function AnalysisPage({ onNavigateToLanding }) {
 
     const droppedFile = e.dataTransfer.files[0]
     if (droppedFile && droppedFile.type === 'application/pdf') {
+      // Check file size (4MB limit to be safe)
+      const maxSize = 4 * 1024 * 1024 // 4MB in bytes
+      if (droppedFile.size > maxSize) {
+        setError('File size must be less than 4MB. Please choose a smaller PDF or compress your document.')
+        setFile(null)
+        return
+      }
       setFile(droppedFile)
       setError(null)
     } else {
@@ -40,6 +47,13 @@ export default function AnalysisPage({ onNavigateToLanding }) {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0]
     if (selectedFile && selectedFile.type === 'application/pdf') {
+      // Check file size (4MB limit to be safe)
+      const maxSize = 4 * 1024 * 1024 // 4MB in bytes
+      if (selectedFile.size > maxSize) {
+        setError('File size must be less than 4MB. Please choose a smaller PDF or compress your document.')
+        setFile(null)
+        return
+      }
       setFile(selectedFile)
       setError(null)
     } else {
@@ -203,7 +217,7 @@ export default function AnalysisPage({ onNavigateToLanding }) {
                       )}
                     </h3>
                     <p className="text-slate-400 mb-4">or click to browse your computer</p>
-                    <p className="text-slate-500 text-sm">PDF files only • Max 50MB</p>
+                    <p className="text-slate-500 text-sm">PDF files only • Max 4MB</p>
                   </div>
                   <input
                     id="fileInput"
