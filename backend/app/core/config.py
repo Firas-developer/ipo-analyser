@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     APP_NAME: str = "IPO Assistant Backend"
 
-    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:5173"]
+    BACKEND_CORS_ORIGINS: List[str] = ["*"]
 
     # Choose which provider you want to use: "gemini", "groq" or "openai"
     LLM_PROVIDER: str = "gemini"
